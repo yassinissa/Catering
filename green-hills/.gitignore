@@ -1,0 +1,20 @@
+# Dependencies & builds
+node_modules/
+frontend/dist/
+backend/staticfiles/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local data & secrets (never commit these)
+backend/db.sqlite3
+backend/.env
+backend/.admin_created
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
