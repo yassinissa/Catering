@@ -34,8 +34,8 @@ echo  On this PC:     http://127.0.0.1:8000
 echo  Admin panel:    http://127.0.0.1:8000/admin
 echo.
 echo  On your PHONE (must be on the same Wi-Fi as this PC), open:
-for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /c:"IPv4"') do echo                  http:/%%a:8000
-echo  (remove the space after http:/ if your phone shows one)
+for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /c:"IPv4"') do for /f "tokens=* delims= " %%b in ("%%a") do echo                  http://%%b:8000
+echo  (if two addresses show, try the one starting with 192.168)
 echo.
 echo  If Windows asks to allow Python through the firewall, tick "Private networks" and click Allow.
 echo  Keep this window open while you test. Close it to stop the website.

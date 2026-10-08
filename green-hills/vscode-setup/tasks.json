@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Setup (first time only)",
+      "type": "shell",
+      "windows": {
+        "command": "cd backend; py -m venv .venv; .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt; .\\.venv\\Scripts\\python.exe manage.py migrate; cd ..\\frontend; npm install; Write-Host ''; Write-Host 'Setup done. Now run the task: 2. Create admin login' -ForegroundColor Green"
+      },
+      "command": "cd backend && python3 -m venv .venv && ./.venv/bin/python -m pip install -r requirements.txt && ./.venv/bin/python manage.py migrate && cd ../frontend && npm install && echo 'Setup done. Now run: 2. Create admin login'",
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Create admin login",
+      "type": "shell",
+      "windows": { "command": "cd backend; .\\.venv\\Scripts\\python.exe manage.py createsuperuser" },
+      "command": "cd backend && ./.venv/bin/python manage.py createsuperuser",
+      "problemMatcher": []
+    },
+    {
+      "label": "Django server (bookings API + admin)",
+      "type": "shell",
+      "windows": { "command": "cd backend; .\\.venv\\Scripts\\python.exe manage.py runserver 0.0.0.0:8000" },
+      "command": "cd backend && ./.venv/bin/python manage.py runserver 0.0.0.0:8000",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "run", "panel": "dedicated" }
+    },
+    {
+      "label": "Website (live reload)",
+      "type": "shell",
+      "command": "cd frontend && npm run dev",
+      "windows": { "command": "cd frontend; npm run dev" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "run", "panel": "dedicated" }
+    },
+    {
+      "label": "3. Run website",
+      "dependsOn": ["Django server (bookings API + admin)", "Website (live reload)"],
+      "dependsOrder": "parallel",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build for production",
+      "type": "shell",
+      "command": "cd frontend && npm run build",
+      "windows": { "command": "cd frontend; npm run build" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run backend tests",
+      "type": "shell",
+      "windows": { "command": "cd backend; .\\.venv\\Scripts\\python.exe manage.py test bookings" },
+      "command": "cd backend && ./.venv/bin/python manage.py test bookings",
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}
