@@ -8,5 +8,5 @@ urlpatterns = [
     path('api/bookings/', views.create_booking, name='create-booking'),
     path('api/health/', views.health, name='health'),
     # everything else is the React website
-    re_path(r'^(?!static/|admin/|api/).*$', views.frontend, name='frontend'),
+    re_path(r'^(?!static/|admin|api/).*$', views.frontend, name='frontend'),
 ]

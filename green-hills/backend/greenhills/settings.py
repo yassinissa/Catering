@@ -108,7 +108,9 @@ USE_TZ = True
 # The React build (frontend/dist) is served as static files under /static/
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [FRONTEND_DIST] if FRONTEND_DIST.exists() else []
+# Always registered, so a build made while the server is running is picked up without a restart
+STATICFILES_DIRS = [FRONTEND_DIST]
+SILENCED_SYSTEM_CHECKS = ['staticfiles.W004']  # dist/ may not exist until the first `npm run build`
 WHITENOISE_INDEX_FILE = False
 WHITENOISE_MAX_AGE = 60 * 60 * 24 * 7
 

@@ -20,25 +20,19 @@ export default function Header() {
   const { t } = useLang()
   const { requestBooking } = useBooking()
   const [solid, setSolid] = useState(false)
-  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('')
-  const lastY = useRef(0)
   const menuBtn = useRef(null)
   const closeBtn = useRef(null)
 
-  // solid background after leaving the top, hide on scroll down, show on scroll up
+  // the bar always stays visible; it only turns solid once the page leaves the top
   useEffect(() => {
     let ticking = false
     const onScroll = () => {
       if (ticking) return
       ticking = true
       requestAnimationFrame(() => {
-        const y = window.scrollY
-        setSolid(y > 40)
-        setHidden(y > 500 && y > lastY.current + 4)
-        if (y < lastY.current - 4 || y < 500) setHidden(false)
-        lastY.current = y
+        setSolid(window.scrollY > 40)
         ticking = false
       })
     }
@@ -79,7 +73,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`header${solid ? ' is-solid' : ''}${hidden && !open ? ' is-hidden' : ''}`}>
+      <header className={`header${solid ? ' is-solid' : ''}`}>
         <div className="wrap header-inner">
           <a href="#top" className="brand" aria-label="Green Hills — home">
             <img src={`${BASE}media/logo-light@3x.png`} alt="Green Hills" width="114" height="40" />

@@ -6,5 +6,5 @@ cd backend
 python3 -m pip install -q -r requirements.txt
 python3 manage.py migrate --noinput
 [ -f .admin_created ] || { python3 manage.py createsuperuser && touch .admin_created; }
-echo "Website: http://127.0.0.1:8000   Admin: http://127.0.0.1:8000/admin"
-python3 manage.py runserver 127.0.0.1:8000
+echo "Website: http://127.0.0.1:8010   Admin: http://127.0.0.1:8010/admin"
+python3 manage.py runserver 127.0.0.1:8010

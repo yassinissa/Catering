@@ -106,8 +106,13 @@ def frontend(request):
     index = settings.FRONTEND_DIST / 'index.html'
     if not index.exists():
         return HttpResponse(
-            '<h1>Frontend not built yet</h1><p>Run <code>npm run build</code> inside the <code>frontend</code> folder, '
-            'then reload this page.</p>',
-            status=503,
+            '<div style="font-family:system-ui;max-width:560px;margin:60px auto;padding:0 20px;line-height:1.6">'
+            '<h1 style="font-size:22px">Green Hills backend is running</h1>'
+            '<p><b>Bookings admin:</b> <a href="/admin/">/admin/</a></p>'
+            '<p><b>Website while developing:</b> run <code>npm run dev</code> in the <code>frontend</code> folder '
+            'and open <a href="http://localhost:5180">http://localhost:5180</a>.</p>'
+            '<p style="color:#666">To serve the website from this address instead, run <code>npm run build</code> '
+            'in the <code>frontend</code> folder and reload.</p></div>',
+            status=200,
         )
     return HttpResponse(index.read_text(encoding='utf-8'))

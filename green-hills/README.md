@@ -23,9 +23,9 @@ You need **Python 3.11+**, **Node.js 18+** and **Git** installed once.
    (creates the Python environment, installs everything, prepares the database)
 3. **Terminal → Run Task… → `2. Create admin login`**: choose a username and password for the bookings panel.
 4. **Terminal → Run Task… → `3. Run website`** (or press `Ctrl+Shift+B`).
-   - Website with live reload: **http://localhost:5173**. Save any file and the page updates instantly.
-   - Bookings admin: **http://localhost:8000/admin**
-   - On your phone (same Wi-Fi): VS Code's terminal shows a `Network:` address like `http://192.168.1.25:5173`. Open that.
+   - Website with live reload: **http://localhost:5180**. Save any file and the page updates instantly.
+   - Bookings admin: **http://localhost:8010/admin**
+   - On your phone (same Wi-Fi): VS Code's terminal shows a `Network:` address like `http://192.168.1.25:5180`. Open that.
 
 Other tasks: **Build for production**, **Run backend tests**. To debug Django with breakpoints, open the
 **Run and Debug** panel and start **Debug Django**.
@@ -35,10 +35,10 @@ Other tasks: **Build for production**, **Run backend tests**. To debug Django wi
 You need **Python 3.11+** and **Node.js 18+** installed once.
 
 Double-click **`start-windows.bat`**. It installs everything, builds the site and opens
-http://127.0.0.1:8000. The first time, it asks you to create an admin username and password.
+http://127.0.0.1:8010. The first time, it asks you to create an admin username and password.
 
-- Website: http://127.0.0.1:8000
-- Bookings admin: http://127.0.0.1:8000/admin
+- Website: http://127.0.0.1:8010
+- Bookings admin: http://127.0.0.1:8010/admin
 
 Manual steps (any OS):
 
@@ -54,7 +54,7 @@ python manage.py createsuperuser   # your admin login
 python manage.py runserver
 ```
 
-While designing, run `npm run dev` in `frontend` (http://localhost:5173) next to
+While designing, run `npm run dev` in `frontend` (http://localhost:5180) next to
 `python manage.py runserver`. The dev server reloads on every save and forwards booking requests to Django.
 
 ## Things to fill in before launch
