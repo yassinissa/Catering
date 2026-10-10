@@ -5,6 +5,8 @@ Everything sensitive comes from environment variables (see .env.example).
 import os
 from pathlib import Path
 
+import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIST = BASE_DIR.parent / 'frontend' / 'dist'
 
@@ -33,7 +35,8 @@ def env_list(name, default=''):
     return [x.strip() for x in os.environ.get(name, default).split(',') if x.strip()]
 
 
-DEBUG = env_bool('DJANGO_DEBUG', True)
+ON_RENDER = 'RENDER' in os.environ  # Render sets this automatically
+DEBUG = env_bool('DJANGO_DEBUG', not ON_RENDER)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or (
     'dev-only-insecure-key-change-me' if DEBUG else None
 )
@@ -44,7 +47,14 @@ ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1')
 if DEBUG and 'DJANGO_ALLOWED_HOSTS' not in os.environ:
     # Local testing: allow phones/tablets on the same Wi-Fi to open the site via this PC's IP address
     ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS')
+
+# Render: trust the service's own address (e.g. green-hills.onrender.com)
+RENDER_HOST = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_HOST}')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -86,11 +96,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'greenhills.wsgi.application'
 
+# Local: SQLite file. Render: PostgreSQL from the DATABASE_URL environment variable.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 # Admin login accepts a username or an email address
@@ -115,6 +127,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [FRONTEND_DIST]
 SILENCED_SYSTEM_CHECKS = ['staticfiles.W004']  # dist/ may not exist until the first `npm run build`
 WHITENOISE_INDEX_FILE = False
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    # compressed copies (gzip/brotli) for fast loading; file names stay as Vite built them
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'
+        if DEBUG else 'whitenoise.storage.CompressedStaticFilesStorage'
+    },
+}
 WHITENOISE_MAX_AGE = 60 * 60 * 24 * 7
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,0 +1,44 @@
+# Render Blueprint for the Green Hills website.
+# Render → New → Blueprint → pick this repository. It creates the database and the web service.
+databases:
+  - name: green-hills-db
+    plan: free            # free Postgres expires after 30 days, upgrade it before then to keep bookings
+    region: frankfurt     # closest Render region to Kuwait
+    databaseName: greenhills
+    user: greenhills
+
+services:
+  - type: web
+    name: green-hills
+    runtime: python
+    plan: free            # free services sleep after 15 min without visitors
+    region: frankfurt
+    rootDir: green-hills
+    buildCommand: ./build.sh
+    startCommand: cd backend && gunicorn greenhills.wsgi:application --bind 0.0.0.0:$PORT
+    healthCheckPath: /api/health/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: green-hills-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: WEB_CONCURRENCY
+        value: "2"
+      # Your admin login, filled in on Render when you create the Blueprint (kept secret)
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      # Optional: email alerts for new bookings (see backend/.env.example)
+      - key: BOOKING_NOTIFY_EMAILS
+        sync: false

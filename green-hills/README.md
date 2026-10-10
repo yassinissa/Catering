@@ -84,16 +84,25 @@ After any change, run `npm run build` again inside `frontend`.
 **Email alerts (optional):** copy `backend/.env.example` to `backend/.env`, set
 `BOOKING_NOTIFY_EMAILS` and the SMTP settings, and every new booking is emailed to the team.
 
-## Going live (production)
+## Going live on Render
 
-1. Copy `backend/.env.example` to `backend/.env` and set `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0`,
-   `DJANGO_ALLOWED_HOSTS` and `DJANGO_CSRF_TRUSTED_ORIGINS` for your domain.
-2. `cd frontend && npm ci && npm run build`
-3. `cd backend && pip install -r requirements.txt gunicorn && python manage.py migrate && python manage.py collectstatic --noinput`
-4. Run `gunicorn greenhills.wsgi --bind 0.0.0.0:8000` behind Nginx with HTTPS.
-   WhiteNoise serves the website files, videos and admin styles itself.
+The repository includes `render.yaml` (at the repository root) and `green-hills/build.sh`.
 
-SQLite is fine to start with. For high volume, switch `DATABASES` in `greenhills/settings.py` to PostgreSQL.
+1. On render.com: **New → Blueprint** → connect GitHub → choose the **Catering** repository → **Apply**.
+2. Render asks for the secret values:
+   - `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`: your admin login (created on the first deploy)
+   - `BOOKING_NOTIFY_EMAILS`: optional, leave empty for now
+3. Wait for the first deploy (about 5 minutes). Your site is live at `https://green-hills.onrender.com` (or the name Render shows),
+   and the admin panel at `/admin`.
+
+Every push to GitHub redeploys automatically.
+
+Free-plan limits:
+- the website sleeps after 15 minutes without visitors; the next visitor waits about a minute
+- the free database **expires after 30 days**. Upgrade it to a paid plan in Render before then, or bookings are deleted.
+
+Own domain: Render → the `green-hills` service → **Settings → Custom Domains**, then add the DNS records it shows, and add the
+domain to `DJANGO_ALLOWED_HOSTS` and `DJANGO_CSRF_TRUSTED_ORIGINS` (with `https://`) in **Environment**.
 
 ## Built-in protection on the booking form
 - Validation in the browser and again on the server (dates, Kuwaiti phone number, guest count, allowed options)
