@@ -108,3 +108,23 @@ class BookingApiTests(TestCase):
         self.assertIn('Test Customer', r.content.decode('utf-8'))
         self.assertEqual(self.client.get('/admin/bookings/booking/').status_code, 200)
         self.assertEqual(self.client.get(f'/admin/bookings/booking/{ids[0]}/change/').status_code, 200)
+
+
+class AdminLoginTests(TestCase):
+    def setUp(self):
+        from django.contrib.auth.models import User
+        User.objects.create_superuser('yassi', 'owner@example.com', 'Pass-12345')
+
+    def test_login_with_username(self):
+        self.assertTrue(self.client.login(username='yassi', password='Pass-12345'))
+
+    def test_login_with_email_any_case(self):
+        self.assertTrue(self.client.login(username='Owner@Example.com', password='Pass-12345'))
+
+    def test_wrong_password_fails(self):
+        self.assertFalse(self.client.login(username='owner@example.com', password='nope'))
+
+    def test_admin_form_accepts_email(self):
+        r = self.client.post('/admin/login/?next=/admin/', {'username': 'owner@example.com', 'password': 'Pass-12345'})
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(self.client.get('/admin/').status_code, 200)
