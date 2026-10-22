@@ -17,6 +17,8 @@ export default defineConfig(({ command }) => ({
       // changeOrigin: false keeps the browser's address, so Django's login security (CSRF) check passes
       '/admin': { target: 'http://127.0.0.1:8010', changeOrigin: false },
       '/static': { target: 'http://127.0.0.1:8010', changeOrigin: false },
+      // photos and videos uploaded in the admin (saved on this computer when running locally)
+      '/uploads': 'http://127.0.0.1:8010',
     },
   },
   build: { outDir: 'dist', assetsDir: 'assets', sourcemap: false },

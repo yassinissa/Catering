@@ -9,6 +9,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
+from content.views import content_script
+
 from . import choices as C
 from .forms import BookingForm
 
@@ -108,11 +110,12 @@ def frontend(request):
         return HttpResponse(
             '<div style="font-family:system-ui;max-width:560px;margin:60px auto;padding:0 20px;line-height:1.6">'
             '<h1 style="font-size:22px">Green Hills backend is running</h1>'
-            '<p><b>Bookings admin:</b> <a href="/admin/">/admin/</a></p>'
+            '<p><b>Bookings & website content admin:</b> <a href="/admin/">/admin/</a></p>'
             '<p><b>Website while developing:</b> run <code>npm run dev</code> in the <code>frontend</code> folder '
             'and open <a href="http://localhost:5180">http://localhost:5180</a>.</p>'
             '<p style="color:#666">To serve the website from this address instead, run <code>npm run build</code> '
             'in the <code>frontend</code> folder and reload.</p></div>',
             status=200,
         )
-    return HttpResponse(index.read_text(encoding='utf-8'))
+    html = index.read_text(encoding='utf-8').replace('</head>', content_script() + '</head>', 1)
+    return HttpResponse(html)

@@ -2,4 +2,7 @@ Django>=5.2.8,<5.3
 whitenoise>=6.8,<7
 gunicorn>=23,<24
 dj-database-url>=2.2,<3
-psycopg[binary]>=3.2,<4
+# PostgreSQL driver, only needed on the server (local runs use SQLite; no Windows ARM build exists)
+psycopg[binary]>=3.2,<4; sys_platform != "win32"
+# Photo/video uploads from the admin are stored on Cloudinary when CLOUDINARY_URL is set
+cloudinary>=1.41,<2

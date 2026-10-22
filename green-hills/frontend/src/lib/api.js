@@ -1,6 +1,16 @@
 const API_BASE = import.meta.env.VITE_API_URL || ''
 const DEMO = import.meta.env.VITE_DEMO === '1'
 
+/** Website content edited in the admin. Returns null when the server can't be reached. */
+export async function fetchContent() {
+  try {
+    const res = await fetch(`${API_BASE}/api/content/`, { headers: { Accept: 'application/json' } })
+    return res.ok ? await res.json() : null
+  } catch {
+    return null
+  }
+}
+
 /** Sends a booking to Django. Returns { reference } or throws an Error with optional fieldErrors. */
 export async function submitBooking(payload) {
   if (DEMO) {

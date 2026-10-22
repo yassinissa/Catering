@@ -3,9 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { AlertCircle, ArrowLeft, ArrowRight, Check, Minus, Pencil, Plus } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
 import { useBooking } from '../lib/booking.jsx'
+import { useContent } from '../lib/content.jsx'
 import { submitBooking } from '../lib/api.js'
 import {
-  BUDGETS, CONTACT_METHODS, CUISINES, EVENTS, EXTRAS, GOVERNORATES, SERVICES, VENUES,
+  BUDGETS, CONTACT_METHODS, EXTRAS, GOVERNORATES, VENUES,
 } from '../content/site.js'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
@@ -13,7 +14,7 @@ import Icon from './Icons.jsx'
 
 const EASE = [0.16, 1, 0.3, 1]
 const DRAFT_KEY = 'gh-booking-draft'
-const SERVICE_OPTIONS = [...SERVICES, { id: 'unsure', icon: 'buffet', name: { en: 'Help me choose', ar: 'ساعدوني في الاختيار' } }]
+const UNSURE = { id: 'unsure', icon: 'buffet', name: { en: 'Help me choose', ar: 'ساعدوني في الاختيار' } }
 
 const EMPTY = {
   eventType: '', date: '', time: '', guests: 50, service: '', cuisines: [], budget: '',
@@ -179,6 +180,8 @@ function SelectField({ name, label, value, onChange, options, error, L, placehol
 export default function Booking() {
   const { t, L, lang, isRTL } = useLang()
   const { prefill } = useBooking()
+  const { cuisines: CUISINES, events: EVENTS, services } = useContent()
+  const SERVICE_OPTIONS = useMemo(() => [...services, UNSURE], [services])
   const b = t.book
   const [form, setForm] = useState(loadDraft)
   const [step, setStep] = useState(0)

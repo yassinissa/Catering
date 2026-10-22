@@ -25,6 +25,8 @@ class MultiChoiceListField(forms.Field):
             raise forms.ValidationError('Expected a list.')
         out = []
         for v in value:
+            if not isinstance(v, str):
+                raise forms.ValidationError('Unknown option.')
             if v not in self.allowed:
                 raise forms.ValidationError(f'Unknown option: {v}')
             if v not in out:
@@ -40,6 +42,12 @@ class BookingForm(forms.ModelForm):
     cuisines = MultiChoiceListField(allowed=C.CUISINES, min_items=1)
     extras = MultiChoiceListField(allowed=C.EXTRAS, required=False)
     consent = forms.BooleanField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # cuisines can be added in the admin; built-in ids stay valid for older forms still open in a browser
+        from content.models import Cuisine
+        self.fields['cuisines'].allowed |= set(Cuisine.objects.values_list('slug', flat=True))
 
     class Meta:
         model = Booking

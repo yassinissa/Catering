@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Flame, Users, Utensils } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
-import { img } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 
@@ -9,7 +9,8 @@ const PILLAR_ICONS = [Flame, Users, Utensils]
 const EASE = [0.16, 1, 0.3, 1]
 
 export default function About() {
-  const { t, lang } = useLang()
+  const { t, L } = useLang()
+  const { about: photos } = useContent()
   const a = t.about
   return (
     <section id="about" className="section light" aria-labelledby="about-title">
@@ -47,8 +48,8 @@ export default function About() {
             transition={{ duration: 1.3, ease: EASE }}
           >
             <motion.img
-              src={img('pomegranate.jpg')}
-              alt={lang === 'ar' ? 'جيلي الرمان بالفستق والنعناع' : 'Pomegranate jelly with pistachio and mint'}
+              src={photos.main.src}
+              alt={L(photos.main.alt)}
               loading="lazy"
               variants={{ hidden: { scale: 1.2 }, shown: { scale: 1 } }}
               transition={{ duration: 1.8, ease: EASE }}
@@ -59,14 +60,14 @@ export default function About() {
             variants={{ hidden: { opacity: 0, y: 40 }, shown: { opacity: 1, y: 0 } }}
             transition={{ duration: 1, delay: 0.45, ease: EASE }}
           >
-            <img src={img('croquettes.jpg')} alt={lang === 'ar' ? 'كروكيت مقرمش مع صلصة' : 'Crispy croquettes with dip'} loading="lazy" />
+            <img src={photos.small.src} alt={L(photos.small.alt)} loading="lazy" />
           </motion.div>
           <motion.div
             className="about-badge"
             variants={{ hidden: { opacity: 0, scale: 0.6, rotate: -20 }, shown: { opacity: 1, scale: 1, rotate: 0 } }}
             transition={{ duration: 0.9, delay: 0.7, ease: EASE }}
           >
-            <span><b>{lang === 'ar' ? '٥' : '5'}</b>{lang === 'ar' ? 'مطابخ' : 'kitchens'}</span>
+            <span><b>{a.badgeNum}</b>{a.badgeText}</span>
           </motion.div>
         </motion.div>
       </div>

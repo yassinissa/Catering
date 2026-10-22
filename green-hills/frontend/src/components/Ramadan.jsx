@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
 import { useBooking } from '../lib/booking.jsx'
-import { RAMADAN } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 
@@ -28,6 +28,7 @@ function Crescent() {
 
 export default function Ramadan() {
   const { t, L } = useLang()
+  const { ramadan: packages } = useContent()
   const { requestBooking } = useBooking()
   const r = t.ramadan
   return (
@@ -51,7 +52,7 @@ export default function Ramadan() {
           </div>
         </div>
         <div className="ramadan-grid">
-          {RAMADAN.map((p, i) => (
+          {packages.map((p, i) => (
             <Reveal as="article" key={p.id} className="ramadan-card" delay={i * 0.1}>
               <div className="r-img"><img src={p.image} alt="" loading="lazy" /></div>
               <div className="r-body">

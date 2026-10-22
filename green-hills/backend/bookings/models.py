@@ -67,7 +67,9 @@ class Booking(models.Model):
 
     @property
     def cuisines_display(self):
-        return ', '.join(C.label(C.CUISINES, c) for c in self.cuisines) or '—'
+        from content.models import Cuisine
+        names = dict(Cuisine.objects.filter(slug__in=self.cuisines).values_list('slug', 'name_en'))
+        return ', '.join(names.get(c) or C.label(C.CUISINES, c) for c in self.cuisines) or '—'
 
     @property
     def extras_display(self):

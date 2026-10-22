@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
 import { useBooking } from '../lib/booking.jsx'
-import { CUISINES } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 import { Leaf } from './Icons.jsx'
@@ -12,11 +12,12 @@ const EASE = [0.16, 1, 0.3, 1]
 
 export default function Cuisines() {
   const { t, L, isRTL } = useLang()
+  const { cuisines: CUISINES } = useContent()
   const { requestBooking } = useBooking()
-  const [active, setActive] = useState(CUISINES[0].id)
+  const [active, setActive] = useState(CUISINES[0]?.id)
   const tabsRef = useRef([])
   const uid = useId()
-  const c = CUISINES.find((x) => x.id === active)
+  const c = CUISINES.find((x) => x.id === active) || CUISINES[0]
 
   // arrow-key navigation between tabs (mirrored in Arabic)
   const onKeyDown = (e, i) => {
@@ -34,6 +35,8 @@ export default function Cuisines() {
     }
   }
 
+  if (!c) return null
+
   return (
     <section id="cuisines" className="section" aria-labelledby="cuisines-title">
       <div className="wrap">
@@ -48,7 +51,7 @@ export default function Cuisines() {
         <Reveal>
           <div className="cuisine-tabs" role="tablist" aria-label={t.cuisines.eyebrow}>
             {CUISINES.map((x, i) => {
-              const selected = x.id === active
+              const selected = x.id === c.id
               return (
                 <button
                   key={x.id}
@@ -71,7 +74,7 @@ export default function Cuisines() {
           </div>
         </Reveal>
 
-        <div className="cuisine-panel" role="tabpanel" id={`${uid}-panel`} aria-labelledby={`${uid}-tab-${active}`}>
+        <div className="cuisine-panel" role="tabpanel" id={`${uid}-panel`} aria-labelledby={`${uid}-tab-${c.id}`}>
           <div className="cuisine-image">
             <AnimatePresence initial={false}>
               <motion.img

@@ -52,8 +52,8 @@
     {
       "label": "Run backend tests",
       "type": "shell",
-      "windows": { "command": "cd backend; .\\.venv\\Scripts\\python.exe manage.py test bookings" },
-      "command": "cd backend && ./.venv/bin/python manage.py test bookings",
+      "windows": { "command": "cd backend; .\\.venv\\Scripts\\python.exe manage.py test bookings content" },
+      "command": "cd backend && ./.venv/bin/python manage.py test bookings content",
       "group": "test",
       "problemMatcher": []
     }

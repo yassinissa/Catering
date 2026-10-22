@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Play, X } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
-import { REELS } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 import AutoVideo from './AutoVideo.jsx'
@@ -59,7 +59,9 @@ function Lightbox({ reel, onClose }) {
 
 export default function Reels() {
   const { t, L, lang } = useLang()
+  const { reels } = useContent()
   const [open, setOpen] = useState(null)
+  if (!reels.length) return null
   return (
     <section className="section" aria-labelledby="reels-title" style={{ paddingTop: 'clamp(72px, 9vw, 120px)' }}>
       <div className="wrap">
@@ -68,7 +70,7 @@ export default function Reels() {
           <Reveal delay={0.05}><h2 id="reels-title" className="h-display h2">{rich(t.reels.title)}</h2></Reveal>
         </div>
         <div className="reels-scroller">
-          {REELS.map((r, i) => (
+          {reels.map((r, i) => (
             <Reveal key={r.id} delay={i * 0.06} style={{ display: 'grid' }}>
               <button type="button" className="reel" onClick={() => setOpen(r)} aria-label={`${t.reels.play}: ${L(r.label)}`}>
                 <AutoVideo src={r.src} poster={r.poster} />

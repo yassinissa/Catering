@@ -1,11 +1,11 @@
 /*
  * ─────────────────────────────────────────────────────────────
- *  GREEN HILLS — SITE CONTENT
- *  Edit text, dishes, events, locations and contact details here.
- *  Every visible text has an English (en) and Arabic (ar) version.
- *
- *  To change a photo: drop the new file in /public/media/img/
- *  and change the file name below (e.g. img('my-photo.jpg')).
+ *  GREEN HILLS — BUILT-IN SITE CONTENT
+ *  Day-to-day changes are made in the admin panel (/admin → Website content):
+ *  photos, videos, dishes, events, restaurants, contact and social links.
+ *  This file was copied into the admin on the first setup and is only used
+ *  when no server is attached (static preview) or for the booking-form options
+ *  at the bottom (governorates, venues, extras, budgets, contact methods).
  * ─────────────────────────────────────────────────────────────
  */
 

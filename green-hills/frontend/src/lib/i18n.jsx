@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { STRINGS } from '../content/strings.js'
+import { applyTexts, useContent } from './content.jsx'
 
 const LangContext = createContext(null)
 const STORAGE_KEY = 'gh-lang'
@@ -15,6 +16,8 @@ function initialLang() {
 
 export function LangProvider({ children }) {
   const [lang, setLang] = useState(initialLang)
+  const { texts } = useContent()
+  const t = useMemo(() => applyTexts(STRINGS[lang], texts, lang), [lang, texts])
 
   useEffect(() => {
     const html = document.documentElement
@@ -28,7 +31,7 @@ export function LangProvider({ children }) {
   // L() picks the right language from a { en, ar } content object
   const L = useCallback((obj) => (obj == null ? '' : typeof obj === 'string' ? obj : obj[lang] ?? obj.en), [lang])
 
-  const value = useMemo(() => ({ lang, setLang, toggle, t: STRINGS[lang], L, isRTL: lang === 'ar' }), [lang, toggle, L])
+  const value = useMemo(() => ({ lang, setLang, toggle, t, L, isRTL: lang === 'ar' }), [lang, toggle, t, L])
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>
 }
 

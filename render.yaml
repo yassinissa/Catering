@@ -15,7 +15,8 @@ services:
     region: frankfurt
     rootDir: green-hills
     buildCommand: ./build.sh
-    startCommand: cd backend && gunicorn greenhills.wsgi:application --bind 0.0.0.0:$PORT
+    # longer timeout so video uploads from the admin have time to reach Cloudinary
+    startCommand: cd backend && gunicorn greenhills.wsgi:application --bind 0.0.0.0:$PORT --timeout 120
     healthCheckPath: /api/health/
     envVars:
       - key: PYTHON_VERSION
@@ -38,6 +39,9 @@ services:
       - key: DJANGO_SUPERUSER_EMAIL
         sync: false
       - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      # Cloudinary account for photos/videos uploaded in the admin (README → Photos & videos)
+      - key: CLOUDINARY_URL
         sync: false
       # Optional: email alerts for new bookings (see backend/.env.example)
       - key: BOOKING_NOTIFY_EMAILS

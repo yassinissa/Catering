@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookings',
+    'content',
 ]
 
 MIDDLEWARE = [
@@ -127,8 +128,16 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [FRONTEND_DIST]
 SILENCED_SYSTEM_CHECKS = ['staticfiles.W004']  # dist/ may not exist until the first `npm run build`
 WHITENOISE_INDEX_FILE = False
+# Photos and videos uploaded in the admin. Render's disk is wiped on every deploy, so there they go to
+# Cloudinary (set CLOUDINARY_URL, see README). Locally they are saved in backend/media/.
+CLOUDINARY_ENABLED = bool(os.environ.get('CLOUDINARY_URL'))
+MEDIA_URL = '/uploads/'  # not /media/: the website's own built-in photos already live there
+MEDIA_ROOT = BASE_DIR / 'media'
 STORAGES = {
-    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'default': {
+        'BACKEND': 'content.storage.CloudinaryStorage'
+        if CLOUDINARY_ENABLED else 'django.core.files.storage.FileSystemStorage'
+    },
     # compressed copies (gzip/brotli) for fast loading; file names stay as Vite built them
     'staticfiles': {
         'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'

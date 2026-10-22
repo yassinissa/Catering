@@ -1,0 +1,274 @@
+{
+  "nav.about": {
+    "en": "About",
+    "ar": "من نحن"
+  },
+  "nav.cuisines": {
+    "en": "Cuisines",
+    "ar": "المطابخ"
+  },
+  "nav.services": {
+    "en": "Services",
+    "ar": "خدماتنا"
+  },
+  "nav.events": {
+    "en": "Events",
+    "ar": "المناسبات"
+  },
+  "nav.ramadan": {
+    "en": "Ramadan",
+    "ar": "رمضان"
+  },
+  "nav.locations": {
+    "en": "Our brands",
+    "ar": "مطاعمنا"
+  },
+  "nav.book": {
+    "en": "Book your event",
+    "ar": "احجز مناسبتك"
+  },
+  "nav.menu": {
+    "en": "Menu",
+    "ar": "القائمة"
+  },
+  "nav.close": {
+    "en": "Close",
+    "ar": "إغلاق"
+  },
+  "hero.eyebrow": {
+    "en": "Catering · Kuwait",
+    "ar": "تموين وضيافة · الكويت"
+  },
+  "hero.title1": {
+    "en": "Five kitchens.",
+    "ar": "خمسة مطابخ."
+  },
+  "hero.title2": {
+    "en": "One table.",
+    "ar": "مائدة واحدة."
+  },
+  "hero.lead": {
+    "en": "Arabic, Lebanese, Chinese, Japanese and Mediterranean catering for weddings, banks, hotels, chalets and every gathering in between.",
+    "ar": "تموين عربي، لبناني، صيني، ياباني ومتوسطي للأعراس والبنوك والفنادق والشاليهات، ولكل مناسبة بينها."
+  },
+  "hero.cta": {
+    "en": "Book your event",
+    "ar": "احجز مناسبتك"
+  },
+  "hero.cta2": {
+    "en": "See the menus",
+    "ar": "تصفّح القوائم"
+  },
+  "hero.scroll": {
+    "en": "Scroll",
+    "ar": "مرّر"
+  },
+  "marquee": {
+    "en": "Weddings\nBanking\nHotels\nChalets\nIftar\nSuhoor\nGatherings\nConferences\nPrivate parties",
+    "ar": "أعراس\nبنوك\nفنادق\nشاليهات\nفطور رمضان\nسحور\nتجمعات\nمؤتمرات\nحفلات خاصة"
+  },
+  "about.eyebrow": {
+    "en": "Who we are",
+    "ar": "من نحن"
+  },
+  "about.title": {
+    "en": "A Kuwaiti catering house with *a world on the menu.*",
+    "ar": "بيت ضيافة كويتي، *وقائمته من كل العالم.*"
+  },
+  "about.p1": {
+    "en": "Green Hills started with one idea: a host should not have to choose between the food their family grew up with and the food their guests travel for. So we built one team that cooks five cuisines properly, each with its own chefs, its own spices and its own fire.",
+    "ar": "بدأت جرين هيلز بفكرة واحدة: المضيف لا يجب أن يختار بين الأكل الذي تربّى عليه وبين الأكل الذي يسافر ضيوفه من أجله. لذلك بنينا فريقًا واحدًا يطبخ خمسة مطابخ كما يجب، لكل مطبخ طهاته وبهاراته وناره."
+  },
+  "about.p2": {
+    "en": "We plan the menu with you, cook it fresh in our central kitchen, bring the stations, the staff and the tableware, and leave the venue the way we found it.",
+    "ar": "نخطط القائمة معك، ونطهوها طازجة في مطبخنا المركزي، ونحضر المحطات وطاقم الضيافة والأواني، ونترك المكان كما وجدناه."
+  },
+  "about.pillars.0.t": {
+    "en": "Cooked fresh, on the day",
+    "ar": "طازج في يوم المناسبة"
+  },
+  "about.pillars.0.d": {
+    "en": "Nothing is reheated from the day before.",
+    "ar": "لا شيء يُعاد تسخينه من اليوم السابق."
+  },
+  "about.pillars.1.t": {
+    "en": "One team, start to finish",
+    "ar": "فريق واحد من البداية للنهاية"
+  },
+  "about.pillars.1.d": {
+    "en": "The person who plans your menu is there on the night.",
+    "ar": "من يخطط قائمتك يكون حاضرًا ليلة المناسبة."
+  },
+  "about.pillars.2.t": {
+    "en": "Any size",
+    "ar": "أي حجم"
+  },
+  "about.pillars.2.d": {
+    "en": "A diwaniya of twenty or a hall of a thousand.",
+    "ar": "ديوانية لعشرين شخصًا أو قاعة لألف."
+  },
+  "about.badgeNum": {
+    "en": "5",
+    "ar": "٥"
+  },
+  "about.badgeText": {
+    "en": "kitchens",
+    "ar": "مطابخ"
+  },
+  "cuisines.eyebrow": {
+    "en": "What we cook",
+    "ar": "ماذا نطبخ"
+  },
+  "cuisines.title": {
+    "en": "Choose a kitchen, *or mix all five.*",
+    "ar": "اختر مطبخًا، *أو امزج الخمسة.*"
+  },
+  "cuisines.sample": {
+    "en": "Sample menu",
+    "ar": "قائمة مقترحة"
+  },
+  "cuisines.note": {
+    "en": "Every menu is tailored to your event. These are a few favourites.",
+    "ar": "كل قائمة تُصمم حسب مناسبتك. هذه بعض الأطباق المفضلة."
+  },
+  "cuisines.ask": {
+    "en": "Ask for this menu",
+    "ar": "اطلب هذه القائمة"
+  },
+  "services.eyebrow": {
+    "en": "What we do",
+    "ar": "ماذا نقدّم"
+  },
+  "services.title": {
+    "en": "How we *serve it*",
+    "ar": "أساليب *التقديم*"
+  },
+  "events.eyebrow": {
+    "en": "Every occasion",
+    "ar": "لكل مناسبة"
+  },
+  "events.title": {
+    "en": "Whatever the occasion, *we know the drill.*",
+    "ar": "مهما كانت المناسبة، *نعرف كيف نديرها.*"
+  },
+  "events.cta": {
+    "en": "Book this",
+    "ar": "احجز"
+  },
+  "ramadan.eyebrow": {
+    "en": "Ramadan with Green Hills",
+    "ar": "رمضان مع جرين هيلز"
+  },
+  "ramadan.title": {
+    "en": "Iftar, ghabga and suhoor, *delivered and served.*",
+    "ar": "فطور وغبقة وسحور، *نوصلها ونقدّمها.*"
+  },
+  "ramadan.lead": {
+    "en": "Daily iftar for offices and families, ghabga nights for teams and majlis, and suhoor spreads that last until dawn. Book early: Ramadan dates fill first.",
+    "ar": "فطور يومي للمكاتب والعائلات، وليالي غبقة للفرق والمجالس، وموائد سحور حتى الفجر. احجز مبكرًا، فمواعيد رمضان تمتلئ أولًا."
+  },
+  "ramadan.cta": {
+    "en": "Plan a Ramadan event",
+    "ar": "خطط لمناسبة رمضانية"
+  },
+  "reels.eyebrow": {
+    "en": "From our kitchen",
+    "ar": "من مطبخنا"
+  },
+  "reels.title": {
+    "en": "Watch it *happen*",
+    "ar": "شاهد كيف *نطبخ*"
+  },
+  "reels.play": {
+    "en": "Play video with sound",
+    "ar": "شغّل الفيديو مع الصوت"
+  },
+  "reels.closeVideo": {
+    "en": "Close video",
+    "ar": "إغلاق الفيديو"
+  },
+  "process.eyebrow": {
+    "en": "How booking works",
+    "ar": "كيف يتم الحجز"
+  },
+  "process.title": {
+    "en": "Three steps to *a full table*",
+    "ar": "ثلاث خطوات *لمائدة عامرة*"
+  },
+  "process.steps.0.t": {
+    "en": "Tell us about the event",
+    "ar": "أخبرنا عن مناسبتك"
+  },
+  "process.steps.0.d": {
+    "en": "Date, guests, venue and the kind of food you have in mind.",
+    "ar": "التاريخ، عدد الضيوف، المكان ونوع الأكل الذي تفكر فيه."
+  },
+  "process.steps.1.t": {
+    "en": "We shape the menu",
+    "ar": "نصمم القائمة"
+  },
+  "process.steps.1.d": {
+    "en": "Our events team calls you with a menu and a quote that fit.",
+    "ar": "يتصل بك فريق المناسبات بقائمة وعرض سعر يناسبانك."
+  },
+  "process.steps.2.t": {
+    "en": "We cook, serve and clear",
+    "ar": "نطبخ ونقدّم ونرتّب"
+  },
+  "process.steps.2.d": {
+    "en": "Our team arrives early, serves through the night and leaves the venue clean.",
+    "ar": "يصل فريقنا مبكرًا، ويقدّم طوال المناسبة، ويترك المكان نظيفًا."
+  },
+  "locations.eyebrow": {
+    "en": "Visit our brands",
+    "ar": "زوروا مطاعمنا"
+  },
+  "locations.title": {
+    "en": "Taste our food any day *at our restaurants.*",
+    "ar": "تذوّقوا أكلنا كل يوم *في مطاعمنا.*"
+  },
+  "locations.directions": {
+    "en": "Directions",
+    "ar": "الاتجاهات"
+  },
+  "locations.call": {
+    "en": "Call",
+    "ar": "اتصل"
+  },
+  "locations.hotline": {
+    "en": "Hotline",
+    "ar": "الخط الساخن"
+  },
+  "locations.follow": {
+    "en": "Follow on Instagram",
+    "ar": "تابعنا على إنستغرام"
+  },
+  "locations.coverage": {
+    "en": "Catering delivered and served across all six governorates",
+    "ar": "نقدّم خدمات التموين والضيافة في جميع المحافظات الست"
+  },
+  "book.eyebrow": {
+    "en": "Book your event",
+    "ar": "احجز مناسبتك"
+  },
+  "book.title": {
+    "en": "Tell us about *your event.*",
+    "ar": "أخبرنا عن *مناسبتك.*"
+  },
+  "book.lead": {
+    "en": "It takes about two minutes. Our events team gets back to you to shape the menu and confirm the details.",
+    "ar": "يستغرق الأمر دقيقتين تقريبًا. يتواصل معك فريق المناسبات لتصميم القائمة وتأكيد التفاصيل."
+  },
+  "footer.tag": {
+    "en": "Catering for every occasion in Kuwait.",
+    "ar": "تموين وضيافة لكل مناسبة في الكويت."
+  },
+  "footer.rights": {
+    "en": "All rights reserved.",
+    "ar": "جميع الحقوق محفوظة."
+  },
+  "footer.top": {
+    "en": "Back to top",
+    "ar": "العودة للأعلى"
+  }
+}

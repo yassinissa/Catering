@@ -1,14 +1,14 @@
 import { ArrowUp, Instagram, Mail, MessageCircle, Phone } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
-import { BRANDS, CONTACT } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import { NAV } from './Header.jsx'
 import Hills from './Hills.jsx'
+import { SocialIcon, socialName } from './Icons.jsx'
 import { scrollToId } from '../lib/scroll.js'
-
-const BASE = import.meta.env.BASE_URL
 
 export default function Footer() {
   const { t, lang } = useLang()
+  const { logo, contact, socials, brands } = useContent()
   const year = new Date().getFullYear()
   return (
     <footer className="footer">
@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src={`${BASE}media/logo-light@3x.png`} alt="Green Hills" width="148" height="52" loading="lazy" />
+            <img src={logo} alt="Green Hills" width="148" height="52" loading="lazy" />
             <p>{t.footer.tag}</p>
           </div>
           <div>
@@ -29,11 +29,18 @@ export default function Footer() {
           <div>
             <h4>{t.locations.eyebrow}</h4>
             <ul>
-              {CONTACT.phone && <li><a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} dir="ltr"><Phone size={16} aria-hidden="true" />{CONTACT.phone}</a></li>}
-              {CONTACT.whatsapp && <li><a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" />WhatsApp</a></li>}
-              {CONTACT.email && <li><a href={`mailto:${CONTACT.email}`}><Mail size={16} aria-hidden="true" />{CONTACT.email}</a></li>}
-              {CONTACT.instagram && <li><a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer"><Instagram size={16} aria-hidden="true" /><span dir="ltr">{CONTACT.instagramHandle}</span></a></li>}
-              {BRANDS.map((b) => (
+              {contact.phone && <li><a href={`tel:${contact.phone.replace(/\s/g, '')}`} dir="ltr"><Phone size={16} aria-hidden="true" />{contact.phone}</a></li>}
+              {contact.whatsapp && <li><a href={`https://wa.me/${contact.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" />WhatsApp</a></li>}
+              {contact.email && <li><a href={`mailto:${contact.email}`}><Mail size={16} aria-hidden="true" />{contact.email}</a></li>}
+              {socials.map((s) => (
+                <li key={s.url}>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.handle ? `${socialName(s.platform)} ${s.handle}` : undefined}>
+                    <SocialIcon platform={s.platform} />
+                    <span dir="ltr">{s.handle || socialName(s.platform)}</span>
+                  </a>
+                </li>
+              ))}
+              {brands.filter((b) => b.instagram).map((b) => (
                 <li key={b.id}><a href={b.instagram} target="_blank" rel="noopener noreferrer"><Instagram size={16} aria-hidden="true" />{b.name} <span dir="ltr" style={{ opacity: 0.6 }}>{b.handle}</span></a></li>
               ))}
               <li><button type="button" onClick={() => scrollToId('top')}><ArrowUp size={16} aria-hidden="true" />{t.footer.top}</button></li>

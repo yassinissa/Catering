@@ -1,6 +1,7 @@
 import { Clock, Instagram, MapPin, Phone } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
-import { BRANDS, GOVERNORATES } from '../content/site.js'
+import { GOVERNORATES } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 
@@ -17,6 +18,7 @@ function PhoneLink({ number, label }) {
 
 export default function Locations() {
   const { t, L } = useLang()
+  const { brands: BRANDS } = useContent()
   const l = t.locations
   return (
     <section id="locations" className="section light" aria-labelledby="locations-title" style={{ paddingTop: 0 }}>
@@ -44,7 +46,7 @@ export default function Locations() {
                 </div>
               </header>
 
-              {b.hotline && (
+              {b.hotline?.length > 0 && (
                 <div className="brand-hotline">
                   <span>{l.hotline}</span>
                   <div className="brand-phones">
@@ -72,11 +74,13 @@ export default function Locations() {
                 ))}
               </ul>
 
-              <a className="brand-insta" href={b.instagram} target="_blank" rel="noopener noreferrer">
-                <Instagram size={18} aria-hidden="true" />
-                <span>{l.follow}</span>
-                <span className="brand-handle" dir="ltr">{b.handle}</span>
-              </a>
+              {b.instagram && (
+                <a className="brand-insta" href={b.instagram} target="_blank" rel="noopener noreferrer">
+                  <Instagram size={18} aria-hidden="true" />
+                  <span>{l.follow}</span>
+                  <span className="brand-handle" dir="ltr">{b.handle}</span>
+                </a>
+              )}
             </Reveal>
           ))}
         </div>

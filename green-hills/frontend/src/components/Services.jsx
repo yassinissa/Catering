@@ -1,11 +1,12 @@
 import { useLang } from '../lib/i18n.jsx'
-import { SERVICES } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
 import Icon from './Icons.jsx'
 
 export default function Services() {
   const { t, L } = useLang()
+  const { services } = useContent()
   return (
     <section id="services" className="section light" aria-labelledby="services-title">
       <div className="wrap">
@@ -14,7 +15,7 @@ export default function Services() {
           <Reveal delay={0.05}><h2 id="services-title" className="h-display h2">{rich(t.services.title)}</h2></Reveal>
         </div>
         <div className="services-grid">
-          {SERVICES.map((s, i) => (
+          {services.map((s, i) => (
             <Reveal key={s.id} className="service-card" delay={i * 0.08}>
               <img src={s.image} alt="" loading="lazy" />
               <div className="service-body">

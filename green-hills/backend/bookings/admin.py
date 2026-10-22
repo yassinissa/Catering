@@ -7,9 +7,9 @@ from django.utils.html import format_html
 from . import choices as C
 from .models import Booking
 
-admin.site.site_header = 'Green Hills · Bookings'
+admin.site.site_header = 'Green Hills · Admin'
 admin.site.site_title = 'Green Hills admin'
-admin.site.index_title = 'Event booking requests'
+admin.site.index_title = 'Bookings & website content'
 
 
 STATUS_COLORS = {

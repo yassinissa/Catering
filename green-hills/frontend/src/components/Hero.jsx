@@ -4,16 +4,19 @@ import { ArrowRight } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
 import { useBooking } from '../lib/booking.jsx'
 import { scrollToId } from '../lib/scroll.js'
-import { REELS, vid } from '../content/site.js'
+import { useContent } from '../lib/content.jsx'
 import AutoVideo from './AutoVideo.jsx'
 import Hills from './Hills.jsx'
 
 const EASE = [0.16, 1, 0.3, 1]
-const MOSAIC = ['r2', 'r3', 'r6'].map((id) => REELS.find((r) => r.id === id))
 
 export default function Hero() {
   const { t, L } = useLang()
+  const { reels } = useContent()
   const { requestBooking } = useBooking()
+  // videos picked in the admin for the left, middle and right spots; the middle one also fills the phone background
+  const mosaic = [1, 2, 3].map((slot) => reels.find((r) => r.heroSlot === slot)).filter(Boolean)
+  const bg = reels.find((r) => r.heroSlot === 2) || mosaic[0] || reels[0]
   const ref = useRef(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -37,7 +40,7 @@ export default function Hero() {
     <section className="hero" id="top" ref={ref} aria-labelledby="hero-title">
       {/* phones & tablets: full-bleed video behind the text */}
       <div className="hero-bg" aria-hidden="true">
-        <AutoVideo src={vid('reel3.mp4')} poster={vid('reel3.jpg')} eager />
+        {bg && <AutoVideo src={bg.src} poster={bg.poster} eager />}
       </div>
 
       <div className="wrap hero-content">
@@ -61,7 +64,7 @@ export default function Hero() {
 
         {/* desktop: three reels at different heights, drifting at different speeds */}
         <div className="hero-mosaic" aria-hidden="true">
-          {MOSAIC.map((r, i) => (
+          {mosaic.map((r, i) => (
             <motion.div
               key={r.id}
               className="mosaic-col"

@@ -1,5 +1,6 @@
 import {
-  Building2, ChefHat, Coffee, ConciergeBell, Heart, Hotel, Mic, Moon, PartyPopper, Sun, Users, UtensilsCrossed,
+  Building2, ChefHat, Coffee, ConciergeBell, Facebook, Ghost, Globe, Heart, Hotel, Instagram, Linkedin, MessageCircle, Mic, Moon,
+  Music2, PartyPopper, Sun, Twitter, Users, UtensilsCrossed, Youtube,
 } from 'lucide-react'
 
 const MAP = {
@@ -29,4 +30,24 @@ export function Leaf({ size = 16, ...rest }) {
       <path d="M3 17c5-9 12-11 18-11-1 7-5 13-13 13-2 0-4-1-5-2Zm3 0c3-3 6-5 10-7-4 3-6 5-8 8Z" />
     </svg>
   )
+}
+
+const SOCIAL = {
+  instagram: [Instagram, 'Instagram'],
+  tiktok: [Music2, 'TikTok'],
+  snapchat: [Ghost, 'Snapchat'],
+  x: [Twitter, 'X'],
+  facebook: [Facebook, 'Facebook'],
+  youtube: [Youtube, 'YouTube'],
+  linkedin: [Linkedin, 'LinkedIn'],
+  whatsapp: [MessageCircle, 'WhatsApp'],
+  website: [Globe, 'Website'],
+}
+
+/** Name of a social platform, as shown when no handle was entered. */
+export const socialName = (platform) => (SOCIAL[platform] || SOCIAL.website)[1]
+
+export function SocialIcon({ platform, size = 16, ...rest }) {
+  const C = (SOCIAL[platform] || SOCIAL.website)[0]
+  return <C size={size} aria-hidden="true" {...rest} />
 }

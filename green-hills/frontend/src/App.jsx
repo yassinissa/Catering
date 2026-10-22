@@ -1,5 +1,6 @@
 import { MotionConfig } from 'framer-motion'
 import { LangProvider, useLang } from './lib/i18n.jsx'
+import { ContentProvider } from './lib/content.jsx'
 import { BookingProvider } from './lib/booking.jsx'
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
@@ -45,11 +46,13 @@ function Page() {
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <LangProvider>
-        <BookingProvider>
-          <Page />
-        </BookingProvider>
-      </LangProvider>
+      <ContentProvider>
+        <LangProvider>
+          <BookingProvider>
+            <Page />
+          </BookingProvider>
+        </LangProvider>
+      </ContentProvider>
     </MotionConfig>
   )
 }

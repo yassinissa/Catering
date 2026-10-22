@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { useLang } from '../lib/i18n.jsx'
 import { useBooking } from '../lib/booking.jsx'
+import { useContent } from '../lib/content.jsx'
 
-const BASE = import.meta.env.BASE_URL
 export const NAV = ['about', 'cuisines', 'services', 'events', 'ramadan', 'locations']
 
 function LangButton() {
@@ -18,6 +18,7 @@ function LangButton() {
 
 export default function Header() {
   const { t } = useLang()
+  const { logo } = useContent()
   const { requestBooking } = useBooking()
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
@@ -76,7 +77,7 @@ export default function Header() {
       <header className={`header${solid ? ' is-solid' : ''}`}>
         <div className="wrap header-inner">
           <a href="#top" className="brand" aria-label="Green Hills — home">
-            <img src={`${BASE}media/logo-light@3x.png`} alt="Green Hills" width="114" height="40" />
+            <img src={logo} alt="Green Hills" width="114" height="40" />
           </a>
           <nav className="nav-links" aria-label="Main">
             {NAV.map((id) => (
@@ -119,7 +120,7 @@ export default function Header() {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="mobile-menu-top">
-              <img src={`${BASE}media/logo-light@3x.png`} alt="Green Hills" width="114" height="40" style={{ height: 40, width: 'auto' }} />
+              <img src={logo} alt="Green Hills" width="114" height="40" style={{ height: 40, width: 'auto' }} />
               <button ref={closeBtn} type="button" className="menu-btn" aria-label={t.nav.close} onClick={() => setOpen(false)}>
                 <X size={20} aria-hidden="true" />
               </button>

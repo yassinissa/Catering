@@ -1,4 +1,5 @@
-/* Interface text (buttons, headings, form labels) in English and Arabic. */
+/* Interface text (buttons, headings, form labels) in English and Arabic.
+ * Headings and paragraphs can be changed in the admin (/admin → Page texts); the booking form's labels live only here. */
 export const STRINGS = {
   en: {
     nav: { about: 'About', cuisines: 'Cuisines', services: 'Services', events: 'Events', ramadan: 'Ramadan', locations: 'Our brands', book: 'Book your event', menu: 'Menu', close: 'Close' },
@@ -24,6 +25,8 @@ export const STRINGS = {
         { t: 'One team, start to finish', d: 'The person who plans your menu is there on the night.' },
         { t: 'Any size', d: 'A diwaniya of twenty or a hall of a thousand.' },
       ],
+      badgeNum: '5',
+      badgeText: 'kitchens',
     },
     cuisines: {
       eyebrow: 'What we cook',
@@ -165,6 +168,8 @@ export const STRINGS = {
         { t: 'فريق واحد من البداية للنهاية', d: 'من يخطط قائمتك يكون حاضرًا ليلة المناسبة.' },
         { t: 'أي حجم', d: 'ديوانية لعشرين شخصًا أو قاعة لألف.' },
       ],
+      badgeNum: '٥',
+      badgeText: 'مطابخ',
     },
     cuisines: {
       eyebrow: 'ماذا نطبخ',
