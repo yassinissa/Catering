@@ -1,6 +1,6 @@
 import {
   Building2, ChefHat, Coffee, ConciergeBell, Facebook, Ghost, Globe, Heart, Hotel, Instagram, Linkedin, MessageCircle, Mic, Moon,
-  Music2, PartyPopper, Sun, Twitter, Users, UtensilsCrossed, Youtube,
+  Music2, PartyPopper, Sofa, Sun, Twitter, Users, UtensilsCrossed, Youtube,
 } from 'lucide-react'
 
 const MAP = {
@@ -11,6 +11,7 @@ const MAP = {
   rings: Heart,
   building: Building2,
   users: Users,
+  sofa: Sofa,
   hotel: Hotel,
   sun: Sun,
   moon: Moon,

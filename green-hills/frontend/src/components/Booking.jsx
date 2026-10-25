@@ -6,7 +6,7 @@ import { useBooking } from '../lib/booking.jsx'
 import { useContent } from '../lib/content.jsx'
 import { submitBooking } from '../lib/api.js'
 import {
-  BUDGETS, CONTACT_METHODS, EXTRAS, GOVERNORATES, VENUES,
+  BUDGETS, CONTACT_METHODS, EXTRAS, GOVERNORATES, SETTINGS, VENUES,
 } from '../content/site.js'
 import Reveal from './Reveal.jsx'
 import { rich } from '../lib/rich.jsx'
@@ -18,20 +18,20 @@ const UNSURE = { id: 'unsure', icon: 'buffet', name: { en: 'Help me choose', ar:
 
 const EMPTY = {
   eventType: '', date: '', time: '', guests: 50, service: '', cuisines: [], budget: '',
-  venueType: '', governorate: '', area: '', address: '', extras: [],
+  venueType: '', setting: '', governorate: '', area: '', address: '', extras: [],
   name: '', phone: '', email: '', company: '', contactMethod: 'whatsapp', notes: '', consent: false,
   website: '', // honeypot: real people never see or fill this
 }
 
 const STEP_FIELDS = [
   ['eventType', 'date', 'time', 'guests', 'service', 'cuisines', 'budget'],
-  ['venueType', 'governorate', 'area', 'address', 'extras'],
+  ['venueType', 'setting', 'governorate', 'area', 'address', 'extras'],
   ['name', 'phone', 'email', 'company', 'contactMethod', 'notes', 'consent'],
 ]
 
 const SERVER_TO_FIELD = {
   event_type: 'eventType', event_date: 'date', start_time: 'time', guests: 'guests', service_style: 'service',
-  cuisines: 'cuisines', budget: 'budget', venue_type: 'venueType', governorate: 'governorate', area: 'area',
+  cuisines: 'cuisines', budget: 'budget', venue_type: 'venueType', setting: 'setting', governorate: 'governorate', area: 'area',
   address: 'address', extras: 'extras', full_name: 'name', phone: 'phone', email: 'email', company: 'company',
   contact_method: 'contactMethod', notes: 'notes', consent: 'consent',
 }
@@ -66,6 +66,7 @@ function validate(step, f) {
   }
   if (step === 1) {
     if (!f.venueType) e.venueType = 'pick'
+    if (!f.setting) e.setting = 'pick'
     if (!f.governorate) e.governorate = 'pick'
     if (!f.area.trim()) e.area = 'required'
   }
@@ -277,6 +278,7 @@ export default function Booking() {
         cuisines: form.cuisines,
         budget: form.budget,
         venue_type: form.venueType,
+        setting: form.setting,
         governorate: form.governorate,
         area: form.area.trim(),
         address: form.address.trim(),
@@ -441,6 +443,7 @@ export default function Booking() {
                     {step === 1 && (
                       <div className="form-step">
                         <ChoiceGroup name="venueType" legend={b.f.venueType} options={VENUES} value={form.venueType} onChange={set('venueType')} error={errMsg('venueType')} L={L} />
+                        <ChoiceGroup name="setting" legend={b.f.setting} options={SETTINGS} value={form.setting} onChange={set('setting')} error={errMsg('setting')} L={L} />
                         <div className="field-row field-row--2">
                           <SelectField name="governorate" label={b.f.governorate} value={form.governorate} onChange={set('governorate')} options={GOVERNORATES} error={errMsg('governorate')} L={L} placeholder={lang === 'ar' ? 'اختر المحافظة' : 'Choose governorate'} />
                           <TextField name="area" label={b.f.area} value={form.area} onChange={set('area')} error={errMsg('area')} placeholder={b.f.areaPh} autoComplete="address-level3" maxLength={80} />
@@ -514,6 +517,7 @@ export default function Booking() {
                             s: 1,
                             rows: [
                               [b.f.venueType, label(VENUES, form.venueType)],
+                              [b.f.setting, label(SETTINGS, form.setting)],
                               [b.f.governorate, label(GOVERNORATES, form.governorate)],
                               [b.f.area, form.area || '—'],
                               [b.f.address, form.address || '—'],

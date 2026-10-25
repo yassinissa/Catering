@@ -7,7 +7,7 @@ export const STRINGS = {
     langLabel: 'Switch to Arabic',
     hero: {
       eyebrow: 'Catering · Kuwait',
-      title1: 'Five kitchens.',
+      title1: 'Six kitchens.',
       title2: 'One table.',
       lead: 'Arabic, Lebanese, Chinese, Japanese and Mediterranean catering for weddings, banks, hotels, chalets and every gathering in between.',
       cta: 'Book your event',
@@ -18,7 +18,7 @@ export const STRINGS = {
     about: {
       eyebrow: 'Who we are',
       title: 'A Kuwaiti catering house with *a world on the menu.*',
-      p1: 'Green Hills started with one idea: a host should not have to choose between the food their family grew up with and the food their guests travel for. So we built one team that cooks five cuisines properly, each with its own chefs, its own spices and its own fire.',
+      p1: 'Green Hills started with one idea: a host should not have to choose between the food their family grew up with and the food their guests travel for. So we built one team that cooks six cuisines properly, each with its own chefs, its own spices and its own fire.',
       p2: 'We plan the menu with you, cook it fresh in our central kitchen, bring the stations, the staff and the tableware, and leave the venue the way we found it.',
       pillars: [
         { t: 'Cooked fresh, on the day', d: 'Nothing is reheated from the day before.' },
@@ -30,7 +30,7 @@ export const STRINGS = {
     },
     cuisines: {
       eyebrow: 'What we cook',
-      title: 'Choose a kitchen, *or mix all five.*',
+      title: 'Choose a kitchen, *or mix all six.*',
       sample: 'Sample menu',
       note: 'Every menu is tailored to your event. These are a few favourites.',
       ask: 'Ask for this menu',
@@ -96,6 +96,7 @@ export const STRINGS = {
         cuisinesHint: 'Choose one or more.',
         budget: 'Budget per guest',
         venueType: 'Venue',
+        setting: 'Indoor or outdoor?',
         governorate: 'Governorate',
         area: 'Area',
         areaPh: 'e.g. Salmiya',
@@ -150,7 +151,7 @@ export const STRINGS = {
     langLabel: 'التبديل إلى الإنجليزية',
     hero: {
       eyebrow: 'تموين وضيافة · الكويت',
-      title1: 'خمسة مطابخ.',
+      title1: 'ستة مطابخ.',
       title2: 'مائدة واحدة.',
       lead: 'تموين عربي، لبناني، صيني، ياباني ومتوسطي للأعراس والبنوك والفنادق والشاليهات، ولكل مناسبة بينها.',
       cta: 'احجز مناسبتك',
@@ -161,7 +162,7 @@ export const STRINGS = {
     about: {
       eyebrow: 'من نحن',
       title: 'بيت ضيافة كويتي، *وقائمته من كل العالم.*',
-      p1: 'بدأت جرين هيلز بفكرة واحدة: المضيف لا يجب أن يختار بين الأكل الذي تربّى عليه وبين الأكل الذي يسافر ضيوفه من أجله. لذلك بنينا فريقًا واحدًا يطبخ خمسة مطابخ كما يجب، لكل مطبخ طهاته وبهاراته وناره.',
+      p1: 'بدأت جرين هيلز بفكرة واحدة: المضيف لا يجب أن يختار بين الأكل الذي تربّى عليه وبين الأكل الذي يسافر ضيوفه من أجله. لذلك بنينا فريقًا واحدًا يطبخ ستة مطابخ كما يجب، لكل مطبخ طهاته وبهاراته وناره.',
       p2: 'نخطط القائمة معك، ونطهوها طازجة في مطبخنا المركزي، ونحضر المحطات وطاقم الضيافة والأواني، ونترك المكان كما وجدناه.',
       pillars: [
         { t: 'طازج في يوم المناسبة', d: 'لا شيء يُعاد تسخينه من اليوم السابق.' },
@@ -173,7 +174,7 @@ export const STRINGS = {
     },
     cuisines: {
       eyebrow: 'ماذا نطبخ',
-      title: 'اختر مطبخًا، *أو امزج الخمسة.*',
+      title: 'اختر مطبخًا، *أو امزج الستة.*',
       sample: 'قائمة مقترحة',
       note: 'كل قائمة تُصمم حسب مناسبتك. هذه بعض الأطباق المفضلة.',
       ask: 'اطلب هذه القائمة',
@@ -239,6 +240,7 @@ export const STRINGS = {
         cuisinesHint: 'اختر واحدًا أو أكثر.',
         budget: 'الميزانية للضيف',
         venueType: 'المكان',
+        setting: 'داخلي أم خارجي؟',
         governorate: 'المحافظة',
         area: 'المنطقة',
         areaPh: 'مثال: السالمية',

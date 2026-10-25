@@ -4,6 +4,7 @@ EVENT_TYPES = [
     ('wedding', 'Weddings & engagements'),
     ('corporate', 'Corporate & banking'),
     ('gathering', 'Family gatherings'),
+    ('diwaniyah', 'Diwaniyah'),
     ('hotel', 'Hotels & venues'),
     ('chalet', 'Chalets & outdoor'),
     ('ramadan', 'Ramadan'),
@@ -25,6 +26,7 @@ CUISINES = [
     ('chinese', 'Chinese'),
     ('japanese', 'Japanese'),
     ('mediterranean', 'Mediterranean'),
+    ('latin', 'Latin American'),
 ]
 
 BUDGETS = [
@@ -43,6 +45,12 @@ VENUES = [
     ('hall', 'Wedding hall'),
     ('office', 'Office / bank'),
     ('other', 'Other'),
+]
+
+SETTINGS = [
+    ('indoor', 'Indoor'),
+    ('outdoor', 'Outdoor'),
+    ('both', 'Indoor & outdoor'),
 ]
 
 GOVERNORATES = [

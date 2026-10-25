@@ -18,6 +18,7 @@ def payload(**over):
         'cuisines': ['arabic', 'lebanese'],
         'budget': '20-35',
         'venue_type': 'hall',
+        'setting': 'indoor',
         'governorate': 'hawalli',
         'area': 'Salmiya',
         'address': 'Hall 3',
@@ -51,10 +52,11 @@ class BookingApiTests(TestCase):
         self.assertEqual(b.guests, 250)
         self.assertEqual(b.cuisines, ['arabic', 'lebanese'])
         self.assertEqual(b.status, 'new')
+        self.assertEqual(b.setting, 'indoor')
         self.assertRegex(ref, r'^GH-\d{6}-[A-Z2-9]{4}$')
 
     def test_optional_fields_can_be_empty(self):
-        r = self.post(payload(start_time=None, budget='', address='', extras=[], email='', notes=''))
+        r = self.post(payload(start_time=None, setting='', budget='', address='', extras=[], email='', notes=''))
         self.assertEqual(r.status_code, 201, r.content)
 
     def test_rejects_past_date_bad_phone_and_no_cuisine(self):

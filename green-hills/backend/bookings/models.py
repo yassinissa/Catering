@@ -28,6 +28,7 @@ class Booking(models.Model):
 
     # Venue
     venue_type = models.CharField(max_length=20, choices=C.VENUES)
+    setting = models.CharField('indoor / outdoor', max_length=10, choices=C.SETTINGS, blank=True)
     governorate = models.CharField(max_length=20, choices=C.GOVERNORATES)
     area = models.CharField(max_length=80)
     address = models.CharField(max_length=200, blank=True)

@@ -43,6 +43,7 @@ def _notify(booking):
         f'Cuisines: {booking.cuisines_display}',
         f'Budget: {C.label(C.BUDGETS, booking.budget)}',
         f'Venue: {C.label(C.VENUES, booking.venue_type)}, {booking.area}, {C.label(C.GOVERNORATES, booking.governorate)}',
+        f'Indoor / outdoor: {C.label(C.SETTINGS, booking.setting) or "—"}',
         f'Address: {booking.address or "—"}',
         f'Also needed: {booking.extras_display}',
         '',

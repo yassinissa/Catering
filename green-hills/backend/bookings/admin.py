@@ -29,7 +29,7 @@ class BookingAdmin(admin.ModelAdmin):
         'service_style', 'governorate', 'created_at',
     )
     list_display_links = ('reference', 'full_name')
-    list_filter = ('status', 'event_type', 'service_style', 'governorate', 'venue_type', 'event_date', 'created_at')
+    list_filter = ('status', 'event_type', 'service_style', 'governorate', 'venue_type', 'setting', 'event_date', 'created_at')
     search_fields = ('reference', 'full_name', 'phone', 'email', 'company', 'area')
     date_hierarchy = 'event_date'
     list_per_page = 50
@@ -38,7 +38,7 @@ class BookingAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Status', {'fields': ('reference', 'status', 'internal_notes')}),
         ('Event', {'fields': ('event_type', 'event_date', 'start_time', 'guests', 'service_style', 'cuisines', 'cuisines_display', 'budget')}),
-        ('Venue', {'fields': ('venue_type', 'governorate', 'area', 'address', 'extras', 'extras_display')}),
+        ('Venue', {'fields': ('venue_type', 'setting', 'governorate', 'area', 'address', 'extras', 'extras_display')}),
         ('Customer', {'fields': ('full_name', 'phone', 'whatsapp_link', 'email', 'company', 'contact_method', 'notes', 'language')}),
         ('System', {'classes': ('collapse',), 'fields': ('created_at', 'updated_at', 'ip_address')}),
     )
@@ -97,14 +97,14 @@ class BookingAdmin(admin.ModelAdmin):
         w = csv.writer(resp)
         w.writerow([
             'Reference', 'Status', 'Created', 'Event type', 'Event date', 'Start time', 'Guests', 'Service', 'Cuisines',
-            'Budget', 'Venue', 'Governorate', 'Area', 'Address', 'Also needed', 'Name', 'Phone', 'Email', 'Company',
+            'Budget', 'Venue', 'Indoor / outdoor', 'Governorate', 'Area', 'Address', 'Also needed', 'Name', 'Phone', 'Email', 'Company',
             'Contact by', 'Notes', 'Team notes',
         ])
         for b in queryset:
             w.writerow([
                 b.reference, b.get_status_display(), b.created_at.strftime('%Y-%m-%d %H:%M'), b.get_event_type_display(),
                 b.event_date, b.start_time or '', b.guests, b.get_service_style_display(), b.cuisines_display,
-                b.get_budget_display(), b.get_venue_type_display(), b.get_governorate_display(), b.area, b.address,
+                b.get_budget_display(), b.get_venue_type_display(), b.get_setting_display(), b.get_governorate_display(), b.area, b.address,
                 b.extras_display, b.full_name, b.phone, b.email, b.company, b.get_contact_method_display(), b.notes,
                 b.internal_notes,
             ])

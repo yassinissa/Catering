@@ -53,7 +53,7 @@ class BookingForm(forms.ModelForm):
         model = Booking
         fields = [
             'event_type', 'event_date', 'start_time', 'guests', 'service_style', 'cuisines', 'budget',
-            'venue_type', 'governorate', 'area', 'address', 'extras',
+            'venue_type', 'setting', 'governorate', 'area', 'address', 'extras',
             'full_name', 'phone', 'email', 'company', 'contact_method', 'notes', 'language',
         ]
 

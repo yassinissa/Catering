@@ -32,14 +32,18 @@ export default function Locations() {
           {BRANDS.map((b, i) => (
             <Reveal as="article" key={b.id} className="brand-card" delay={i * 0.08} aria-labelledby={`brand-${b.id}`}>
               <header className="brand-head">
-                <img
-                  className="brand-logo"
-                  src={b.logo}
-                  alt={`${b.name} logo`}
-                  width="76"
-                  height="76"
-                  loading="lazy"
-                />
+                {b.logo ? (
+                  <img
+                    className="brand-logo"
+                    src={b.logo}
+                    alt={`${b.name} logo`}
+                    width="76"
+                    height="76"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="brand-logo brand-logo--initial" aria-hidden="true">{b.name.charAt(0)}</span>
+                )}
                 <div className="brand-title">
                   <h3 id={`brand-${b.id}`}>{b.name}</h3>
                   <span className="brand-count">{l.branches(b.branches.length)}</span>

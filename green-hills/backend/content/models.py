@@ -299,7 +299,7 @@ class RamadanPackage(Ordered):
 
 class Brand(Ordered):
     name = models.CharField(max_length=60)
-    logo = image_field('brands', 'Square logo, 300×300 px or larger.', 'logo')
+    logo = image_field('brands', "Square logo, 300×300 px or larger. Until one is uploaded, the website shows the name's first letter.", 'logo')
     logo_builtin = builtin_field()
     instagram = models.URLField(max_length=300, blank=True, help_text='e.g. https://www.instagram.com/woknrollkw')
     handle = models.CharField('Instagram handle', max_length=60, blank=True, help_text='e.g. @woknrollkw')
@@ -310,10 +310,6 @@ class Brand(Ordered):
 
     def __str__(self):
         return self.name
-
-    def clean(self):
-        if not self.logo and not self.logo_builtin:
-            raise ValidationError({'logo': 'Upload a logo.'})
 
     @property
     def hotline_list(self):

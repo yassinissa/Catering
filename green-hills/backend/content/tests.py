@@ -24,16 +24,19 @@ class SeedTests(TestCase):
 
     def test_lists_and_texts_are_seeded(self):
         d = self.client.get('/api/content/').json()
-        self.assertEqual([c['id'] for c in d['cuisines']], ['arabic', 'lebanese', 'chinese', 'japanese', 'mediterranean'])
+        self.assertEqual([c['id'] for c in d['cuisines']], ['arabic', 'lebanese', 'chinese', 'japanese', 'mediterranean', 'latin'])
         self.assertEqual(len(d['cuisines'][0]['dishes']), 5)
-        self.assertEqual(len(d['events']), 8)
+        self.assertEqual(len(d['events']), 9)
+        self.assertEqual(d['events'][3]['id'], 'diwaniyah')  # right after family gatherings
         self.assertEqual(len(d['services']), 4)
         self.assertEqual(len(d['ramadan']), 3)
         self.assertEqual(len(d['reels']), 6)
         self.assertEqual(sorted(r['heroSlot'] for r in d['reels'] if r['heroSlot']), [1, 2, 3])
         self.assertEqual(d['reels'][0]['src'], 'videos/reel3.mp4')
         self.assertEqual(d['brands'][0]['hotline'], ['25310857', '25310858'])
-        self.assertEqual(d['texts']['hero.title1'], {'en': 'Five kitchens.', 'ar': SiteText.objects.get(key='hero.title1').ar})
+        self.assertEqual([b['name'] for b in d['brands']], ['Wok n Roll', 'Dine', 'Luma', 'Sando', 'Beit Ladan', 'Estepona'])
+        self.assertEqual(d['brands'][3]['logo'], '')
+        self.assertEqual(d['texts']['hero.title1'], {'en': 'Six kitchens.', 'ar': SiteText.objects.get(key='hero.title1').ar})
         self.assertIn('Weddings\n', d['texts']['marquee']['en'])
         self.assertNotIn('book.f.name', d['texts'])  # booking form labels stay in code
 
@@ -138,12 +141,12 @@ class AdminTests(TestCase):
 
     def test_texts_can_be_edited_and_restored(self):
         t = SiteText.objects.get(key='hero.title1')
-        t.en = 'Six kitchens.'
+        t.en = 'Seven kitchens.'
         t.save()
-        self.assertEqual(self.client.get('/api/content/').json()['texts']['hero.title1']['en'], 'Six kitchens.')
+        self.assertEqual(self.client.get('/api/content/').json()['texts']['hero.title1']['en'], 'Seven kitchens.')
         self.client.post('/admin/content/sitetext/', {'action': 'restore_original', '_selected_action': [t.pk]})
         t.refresh_from_db()
-        self.assertEqual(t.en, 'Five kitchens.')
+        self.assertEqual(t.en, 'Six kitchens.')
 
 
 class PageTests(TestCase):

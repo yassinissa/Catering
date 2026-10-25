@@ -5,7 +5,7 @@
  *  photos, videos, dishes, events, restaurants, contact and social links.
  *  This file was copied into the admin on the first setup and is only used
  *  when no server is attached (static preview) or for the booking-form options
- *  at the bottom (governorates, venues, extras, budgets, contact methods).
+ *  at the bottom (governorates, venues, indoor/outdoor, extras, budgets, contact methods).
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -99,6 +99,19 @@ export const CUISINES = [
       { en: 'Pomegranate & pistachio jelly', ar: 'جيلي الرمان بالفستق' },
     ],
   },
+  {
+    id: 'latin',
+    name: { en: 'Latin American', ar: 'أمريكا اللاتينية' },
+    tagline: { en: 'Smoky chipotle, bright lime and corn straight off the grill.', ar: 'شيبوتلي مدخّن، ليمون منعش وذرة مشوية على النار.' },
+    image: img('skewer.jpg'),
+    dishes: [
+      { en: 'Beef tacos with pico de gallo', ar: 'تاكو لحم مع بيكو دي غايو' },
+      { en: 'Chicken empanadas', ar: 'إمباناداس بالدجاج' },
+      { en: 'Sea bass ceviche', ar: 'سيفيتشي سمك القاروص' },
+      { en: 'Grilled corn with lime & cheese', ar: 'ذرة مشوية بالليمون والجبن' },
+      { en: 'Churros with dulce de leche', ar: 'تشوروز مع دولسي دي ليتشي' },
+    ],
+  },
 ]
 
 /* ── Service styles ── */
@@ -137,7 +150,8 @@ export const SERVICES = [
 export const EVENTS = [
   { id: 'wedding', icon: 'rings', name: { en: 'Weddings & engagements', ar: 'أعراس وملكات' }, text: { en: 'From the malka to the wedding night.', ar: 'من الملكة إلى ليلة الزفاف.' } },
   { id: 'corporate', icon: 'building', name: { en: 'Corporate & banking', ar: 'شركات وبنوك' }, text: { en: 'Board meetings, launches, staff days.', ar: 'اجتماعات، إطلاقات، أيام موظفين.' } },
-  { id: 'gathering', icon: 'users', name: { en: 'Family gatherings', ar: 'تجمعات عائلية' }, text: { en: 'Diwaniyas, reunions, weekend lunches.', ar: 'دواوين، لقاءات عائلية، وغداء نهاية الأسبوع.' } },
+  { id: 'gathering', icon: 'users', name: { en: 'Family gatherings', ar: 'تجمعات عائلية' }, text: { en: 'Reunions, weekend lunches, family occasions.', ar: 'لقاءات عائلية، غداء نهاية الأسبوع ومناسبات العائلة.' } },
+  { id: 'diwaniyah', icon: 'sofa', name: { en: 'Diwaniyah', ar: 'ديوانية' }, text: { en: 'Weekly nights, gahwa and late dinners.', ar: 'ليالي الديوانية، القهوة والعشاء المتأخر.' } },
   { id: 'hotel', icon: 'hotel', name: { en: 'Hotels & venues', ar: 'فنادق وقاعات' }, text: { en: 'Partner kitchen for halls and hotels.', ar: 'مطبخ شريك للقاعات والفنادق.' } },
   { id: 'chalet', icon: 'sun', name: { en: 'Chalets & outdoor', ar: 'شاليهات ومخيمات' }, text: { en: 'Grills by the sea or in the desert camp.', ar: 'مشاوي على البحر أو في المخيم.' } },
   { id: 'ramadan', icon: 'moon', name: { en: 'Ramadan', ar: 'رمضان' }, text: { en: 'Iftar, ghabga and suhoor.', ar: 'فطور، غبقة وسحور.' } },
@@ -216,6 +230,43 @@ export const BRANDS = [
       { name: { en: 'Jabriya – Block 1A, Street 5, Parcel 103', ar: 'الجابرية – قطعة 1أ، شارع 5، قسيمة 103' }, hours: '', phone: '', maps: maps('Luma Jabriya Block 1A Street 5') },
     ],
   },
+  {
+    id: 'sando',
+    name: 'Sando',
+    logo: '',
+    instagram: 'https://www.instagram.com/sandokwt/',
+    handle: '@sandokwt',
+    branches: [
+      { name: { en: 'Kuwait', ar: 'الكويت' }, hours: { en: '7 AM – 11 PM', ar: '٧ صباحًا – ١١ مساءً' }, phone: '50509445', maps: maps('Sando') },
+    ],
+  },
+  {
+    id: 'beitladan',
+    name: 'Beit Ladan',
+    logo: '',
+    instagram: 'https://www.instagram.com/beit_ladan/',
+    handle: '@beit_ladan',
+    hotline: ['25356338', '25318411', '25318422'],
+    branches: [
+      { name: { en: 'Jabriya – Block 3A, Street 2', ar: 'الجابرية – قطعة 3أ، شارع 2' }, hours: { en: '11 AM – 10 PM', ar: '١١ صباحًا – ١٠ مساءً' }, phone: '', maps: maps('Beit Ladan Jabriya Block 3A Street 2') },
+    ],
+  },
+  {
+    id: 'estepona',
+    name: 'Estepona',
+    logo: '',
+    instagram: 'https://www.instagram.com/estepona_kw/',
+    handle: '@estepona_kw',
+    branches: [
+      { name: { en: 'Jabriya – Block 3A, Street 5', ar: 'الجابرية – قطعة 3أ، شارع 5' }, hours: '', phone: '25315505', maps: maps('Estepona Jabriya Block 3A Street 5') },
+    ],
+  },
+]
+
+export const SETTINGS = [
+  { id: 'indoor', name: { en: 'Indoor', ar: 'داخلي' } },
+  { id: 'outdoor', name: { en: 'Outdoor', ar: 'خارجي' } },
+  { id: 'both', name: { en: 'Both', ar: 'الاثنين معًا' } },
 ]
 
 export const GOVERNORATES = [
