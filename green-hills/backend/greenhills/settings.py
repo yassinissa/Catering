@@ -176,5 +176,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {'console': {'class': 'logging.StreamHandler'}},
-    'loggers': {'bookings': {'handlers': ['console'], 'level': 'INFO'}},
+    'loggers': {
+        'bookings': {'handlers': ['console'], 'level': 'INFO'},
+        # server errors (500) with their traceback, so they show up in Render's logs
+        'django.request': {'handlers': ['console'], 'level': 'ERROR', 'propagate': False},
+    },
 }
