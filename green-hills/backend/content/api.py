@@ -2,7 +2,7 @@
 from urllib.parse import quote_plus
 
 from .models import (
-    Brand, Cuisine, EventType, RamadanPackage, Reel, Service, SiteSettings, SiteText, SocialLink, file_url,
+    Brand, Cuisine, EventType, OfferItem, RamadanPackage, Reel, Service, SiteSettings, SiteText, SocialLink, file_url,
 )
 
 
@@ -53,6 +53,10 @@ def site_content():
         'ramadan': [
             {'id': str(x.pk), 'name': _bi(x.name_en, x.name_ar), 'time': _bi(x.time_en, x.time_ar), 'text': _bi(x.text_en, x.text_ar), 'image': file_url(x.image, x.image_builtin)}
             for x in RamadanPackage.objects.filter(is_active=True)
+        ],
+        'offer': [
+            {'id': str(x.pk), 'category': x.category, 'name': _bi(x.name_en, x.name_ar), 'price': str(x.price), 'image': file_url(x.image, x.image_builtin)}
+            for x in OfferItem.objects.filter(is_active=True)
         ],
         'brands': [
             {

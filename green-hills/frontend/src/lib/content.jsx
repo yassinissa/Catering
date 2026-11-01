@@ -31,6 +31,7 @@ const FALLBACK = {
   services: SITE.SERVICES,
   events: SITE.EVENTS,
   ramadan: SITE.RAMADAN,
+  offer: SITE.OFFER,
   brands: SITE.BRANDS,
 }
 
@@ -49,6 +50,7 @@ function fromServer(d) {
     services: d.services.map((s) => ({ ...s, image: asset(s.image) })),
     events: d.events,
     ramadan: d.ramadan.map((p) => ({ ...p, image: asset(p.image) })),
+    offer: d.offer.map((x) => ({ ...x, image: asset(x.image) })),
     brands: d.brands.map((b) => ({ ...b, logo: asset(b.logo) })),
   }
 }

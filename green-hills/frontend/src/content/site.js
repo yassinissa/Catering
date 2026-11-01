@@ -184,6 +184,25 @@ export const RAMADAN = [
   },
 ]
 
+/* ── Luma Ramadan delivery offer ── customer-facing names and selling prices (KD) only */
+const luma = (name) => `${BASE}media/luma/${name}.jpg`
+const offerItem = (category, slug, en, ar, price) => ({ id: slug, category, name: { en, ar }, price, image: luma(slug) })
+
+export const OFFER = [
+  offerItem('cake', 'cake-chocolate', 'Decadent Chocolate Cake', 'كيكة الشوكولاتة الفاخرة', '18.000'),
+  offerItem('cake', 'cake-cheese', 'Cheese Cake', 'تشيز كيك', '22.000'),
+  offerItem('cake', 'cake-tiramisu', 'Tiramisu Cake', 'كيكة تيراميسو', '17.000'),
+  offerItem('cake', 'cake-ecuador', 'Ecuador Cake', 'كيكة الإكوادور', '19.000'),
+  offerItem('drink', 'drink-blue-lagoon-mojito', 'Blue Lagoon Mojito', 'موهيتو بلو لاجون', '1.500'),
+  offerItem('drink', 'drink-passion-fruit-mojito', 'Passion Fruit Mojito', 'موهيتو باشن فروت', '1.750'),
+  offerItem('drink', 'drink-mix-berries-mojito', 'Mix Berries Mojito', 'موهيتو ميكس بيريز', '1.750'),
+  offerItem('drink', 'drink-classic-mojito', 'Classic Mojito', 'موهيتو كلاسيك', '1.500'),
+  offerItem('drink', 'drink-ice-americano', 'Ice Americano', 'آيس أمريكانو', '1.250'),
+  offerItem('drink', 'drink-ice-latte', 'Ice Latte', 'آيس لاتيه', '1.500'),
+  offerItem('drink', 'drink-ice-coconut-latte', 'Ice Coconut Latte', 'آيس لاتيه جوز الهند', '2.000'),
+  offerItem('drink', 'drink-mix-berries-latte', 'Mix Berries Latte', 'ميكس بيريز لاتيه', '2.000'),
+]
+
 /* ── Our restaurants ("Visit our brands") ──
  * phone: digits as dialled in Kuwait (8 digits). hours: leave '' if unknown.
  * logo: file in /public/media/brands/

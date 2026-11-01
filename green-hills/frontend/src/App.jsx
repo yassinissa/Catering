@@ -10,6 +10,7 @@ import Cuisines from './components/Cuisines.jsx'
 import Services from './components/Services.jsx'
 import Events from './components/Events.jsx'
 import Ramadan from './components/Ramadan.jsx'
+import LumaOffer from './components/LumaOffer.jsx'
 import Reels from './components/Reels.jsx'
 import Process from './components/Process.jsx'
 import Locations from './components/Locations.jsx'
@@ -32,6 +33,7 @@ function Page() {
         <Services />
         <Events />
         <Ramadan />
+        <LumaOffer />
         <Reels />
         <Process />
         <Locations />

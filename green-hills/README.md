@@ -73,6 +73,7 @@ No rebuild is needed.
 | **Cuisines** | add new cuisines, change photo, tagline and sample menu dishes |
 | **Service styles / Event types** | change names, descriptions, photos, order, hide (these can't be added: their ids are saved with bookings) |
 | **Ramadan packages** | add / edit / hide, with photos |
+| **Luma Ramadan offer items** | the cakes and iced drinks: names, prices, photos, order. Hide all of them and the whole section disappears. Its headings and dates are under **Page texts → Luma Ramadan offer** |
 | **Restaurants** | Wok n Roll, Dine, Luma (or new ones): logo, Instagram, hotline, branches with hours, phone and map link |
 
 Every list has **Position** (lower shows first) and **Show on website** columns you can change right in the list.

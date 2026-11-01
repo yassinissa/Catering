@@ -13,7 +13,7 @@ from django.utils import timezone
 from bookings.models import Booking
 from bookings.tests import payload
 
-from .models import Cuisine, Reel, SiteText, SocialLink
+from .models import Cuisine, OfferItem, Reel, SiteText, SocialLink
 from .storage import CloudinaryStorage
 
 MEDIA = tempfile.mkdtemp()
@@ -39,6 +39,39 @@ class SeedTests(TestCase):
         self.assertEqual(d['texts']['hero.title1'], {'en': 'Six kitchens.', 'ar': SiteText.objects.get(key='hero.title1').ar})
         self.assertIn('Weddings\n', d['texts']['marquee']['en'])
         self.assertNotIn('book.f.name', d['texts'])  # booking form labels stay in code
+
+
+class LumaOfferTests(TestCase):
+    def test_offer_is_seeded_with_public_prices(self):
+        d = self.client.get('/api/content/').json()
+        cakes = [x for x in d['offer'] if x['category'] == 'cake']
+        drinks = [x for x in d['offer'] if x['category'] == 'drink']
+        self.assertEqual(
+            [(c['name']['en'], c['price']) for c in cakes],
+            [('Decadent Chocolate Cake', '18.000'), ('Cheese Cake', '22.000'), ('Tiramisu Cake', '17.000'), ('Ecuador Cake', '19.000')],
+        )
+        self.assertEqual(
+            [(x['name']['en'], x['price']) for x in drinks],
+            [
+                ('Blue Lagoon Mojito', '1.500'), ('Passion Fruit Mojito', '1.750'), ('Mix Berries Mojito', '1.750'),
+                ('Classic Mojito', '1.500'), ('Ice Americano', '1.250'), ('Ice Latte', '1.500'),
+                ('Ice Coconut Latte', '2.000'), ('Mix Berries Latte', '2.000'),
+            ],
+        )
+        self.assertEqual(cakes[0]['image'], 'luma/cake-chocolate.jpg')
+        self.assertEqual(set(cakes[0]), {'id', 'category', 'name', 'price', 'image'})  # never costs or margins
+        self.assertEqual(d['texts']['offer.cta']['en'], 'Message Luma on Instagram')
+
+    def test_hidden_item_is_left_out(self):
+        OfferItem.objects.filter(name_en='Cheese Cake').update(is_active=False)
+        names = [x['name']['en'] for x in self.client.get('/api/content/').json()['offer']]
+        self.assertNotIn('Cheese Cake', names)
+        self.assertEqual(len(names), 11)
+
+    def test_offer_texts_sit_right_after_the_ramadan_texts(self):
+        keys = list(SiteText.objects.values_list('key', flat=True))
+        self.assertEqual(keys[keys.index('ramadan.cta') + 1], 'offer.eyebrow')
+        self.assertEqual(keys[keys.index('offer.drinksTitle') + 1], 'reels.eyebrow')
 
 
 class ContentApiTests(TestCase):
@@ -86,7 +119,9 @@ class AdminTests(TestCase):
         for url in [
             '/admin/', '/admin/content/sitetext/', '/admin/content/sitetext/?section=hero', '/admin/content/reel/',
             '/admin/content/cuisine/', '/admin/content/cuisine/add/', '/admin/content/service/', '/admin/content/eventtype/',
-            '/admin/content/ramadanpackage/', '/admin/content/brand/', '/admin/content/sociallink/add/',
+            '/admin/content/ramadanpackage/', '/admin/content/offeritem/', '/admin/content/offeritem/add/',
+            f'/admin/content/offeritem/{OfferItem.objects.first().pk}/change/',
+            '/admin/content/brand/', '/admin/content/sociallink/add/',
             f'/admin/content/cuisine/{Cuisine.objects.first().pk}/change/', f'/admin/content/reel/{Reel.objects.first().pk}/change/',
         ]:
             self.assertEqual(self.client.get(url).status_code, 200, url)

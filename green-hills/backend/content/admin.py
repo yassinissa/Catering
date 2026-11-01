@@ -7,7 +7,8 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from .models import (
-    Branch, Brand, Cuisine, Dish, EventType, RamadanPackage, Reel, Service, SiteSettings, SiteText, SocialLink, admin_url,
+    Branch, Brand, Cuisine, Dish, EventType, OfferItem, RamadanPackage, Reel, Service, SiteSettings, SiteText, SocialLink,
+    admin_url,
 )
 
 THUMB = 'height:{h}px;width:auto;max-width:{w}px;border-radius:8px;object-fit:cover;background:#ddd;display:block'
@@ -108,6 +109,8 @@ TEXT_NAMES = {
     'closeVideo': 'Close video button (screen readers)', 'directions': 'Directions link', 'call': 'Call link',
     'hotline': 'Hotline label', 'follow': 'Instagram link', 'badgeNum': 'Round badge, number', 'badgeText': 'Round badge, word',
     'menu': 'Menu button', 'close': 'Close button', 'book': '"Book" button',
+    'cakesTitle': 'Cakes heading', 'cakeTag': 'Label on each cake', 'drinksTitle': 'Drinks heading',
+    'openLabel': 'Pre-orders label', 'open': 'Pre-orders date', 'launchLabel': 'Launch label', 'launch': 'Launch date',
 }
 LIST_NAMES = {'pillars': 'Highlight', 'steps': 'Step'}
 
@@ -259,6 +262,24 @@ class RamadanPackageAdmin(UploadsAdmin):
     list_display_links = ('preview', 'name_en')
     readonly_fields = ('preview_large',)
     fields = ('name_en', 'name_ar', 'time_en', 'time_ar', 'text_en', 'text_ar', 'preview_large', 'image', 'order', 'is_active')
+
+    @admin.display(description='Photo')
+    def preview(self, obj):
+        return thumb(admin_url(obj.image, obj.image_builtin))
+
+    @admin.display(description='Current photo')
+    def preview_large(self, obj):
+        return thumb(admin_url(obj.image, obj.image_builtin), 160, 280) if obj.pk else '—'
+
+
+@admin.register(OfferItem)
+class OfferItemAdmin(UploadsAdmin):
+    list_display = ('preview', 'name_en', 'name_ar', 'category', 'price', 'order', 'is_active')
+    list_editable = ('price', 'order', 'is_active')
+    list_display_links = ('preview', 'name_en')
+    list_filter = ('category',)
+    readonly_fields = ('preview_large',)
+    fields = ('category', 'name_en', 'name_ar', 'price', 'preview_large', 'image', 'order', 'is_active')
 
     @admin.display(description='Photo')
     def preview(self, obj):

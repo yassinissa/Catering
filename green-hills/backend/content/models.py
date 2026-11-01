@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MinValueValidator
 from django.db import models
 from django.templatetags.static import static
 from django.utils.deconstruct import deconstructible
@@ -129,6 +129,7 @@ class SiteText(models.Model):
         ('services', 'Services'),
         ('events', 'Events'),
         ('ramadan', 'Ramadan'),
+        ('offer', 'Luma Ramadan offer'),
         ('reels', 'Videos'),
         ('process', 'How booking works'),
         ('locations', 'Our restaurants'),
@@ -288,6 +289,30 @@ class RamadanPackage(Ordered):
 
     class Meta(Ordered.Meta):
         verbose_name = 'Ramadan package'
+
+    def __str__(self):
+        return self.name_en
+
+    def clean(self):
+        if not self.image and not self.image_builtin:
+            raise ValidationError({'image': 'Upload a photo.'})
+
+
+class OfferItem(Ordered):
+    """One product of the Luma Ramadan delivery offer. Only what customers may see: never store costs or margins here."""
+    CAKE, DRINK = 'cake', 'drink'
+    CATEGORIES = [(CAKE, 'Whole cake'), (DRINK, 'Iced drink')]
+
+    category = models.CharField(max_length=10, choices=CATEGORIES)
+    name_en = models.CharField('name (English)', max_length=60)
+    name_ar = models.CharField('name (Arabic)', max_length=60)
+    price = models.DecimalField('price (KD)', max_digits=6, decimal_places=3, validators=[MinValueValidator(0)])
+    image = image_field('offer', 'Cakes: landscape, about 1400px wide. Drinks: portrait, about 600px wide.')
+    image_builtin = builtin_field()
+
+    class Meta:
+        ordering = ['category', 'order', 'id']
+        verbose_name = 'Luma Ramadan offer item'
 
     def __str__(self):
         return self.name_en
